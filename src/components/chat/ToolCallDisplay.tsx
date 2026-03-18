@@ -42,13 +42,13 @@ export function ToolCallDisplay({ toolName, args, state }: ToolCallDisplayProps)
   const done = state === "result";
 
   return (
-    <div className="inline-flex items-center gap-2 mt-2 px-3 py-1.5 bg-neutral-50 rounded-lg text-xs font-mono border border-neutral-200">
+    <div className="inline-flex items-center gap-2 mt-2 px-3 py-1.5 bg-white/5 rounded-lg text-xs font-mono border border-white/8">
       {done ? (
-        <div className="w-2 h-2 rounded-full bg-emerald-500" />
+        <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
       ) : (
-        <Loader2 className="w-3 h-3 animate-spin text-blue-600" />
+        <Loader2 className="w-3 h-3 animate-spin text-violet-400" />
       )}
-      <span className="text-neutral-700">{label}</span>
+      <span className="text-zinc-400">{label}</span>
     </div>
   );
 }

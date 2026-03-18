@@ -96,10 +96,17 @@ export function HeaderActions({ user, projectId }: HeaderActionsProps) {
     return (
       <>
         <div className="flex gap-2">
-          <Button variant="outline" className="h-8" onClick={handleSignInClick}>
+          <Button
+            variant="outline"
+            className="h-8 text-xs border-white/10 bg-white/5 text-zinc-300 hover:bg-white/10 hover:text-zinc-100"
+            onClick={handleSignInClick}
+          >
             Sign In
           </Button>
-          <Button className="h-8" onClick={handleSignUpClick}>
+          <Button
+            className="h-8 text-xs bg-violet-600 hover:bg-violet-500 text-white"
+            onClick={handleSignUpClick}
+          >
             Sign Up
           </Button>
         </div>
@@ -117,35 +124,39 @@ export function HeaderActions({ user, projectId }: HeaderActionsProps) {
       {!initialLoading && (
         <Popover open={projectsOpen} onOpenChange={setProjectsOpen}>
           <PopoverTrigger asChild>
-            <Button variant="outline" className="h-8 gap-2" role="combobox">
-              <FolderOpen className="h-4 w-4" />
+            <Button
+              variant="outline"
+              className="h-8 gap-2 text-xs border-white/10 bg-white/5 text-zinc-300 hover:bg-white/10 hover:text-zinc-100"
+              role="combobox"
+            >
+              <FolderOpen className="h-3.5 w-3.5" />
               {currentProject ? currentProject.name : "Select Project"}
               <ChevronDown className="h-3 w-3 opacity-50" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-[300px] p-0" align="end">
-            <Command>
+          <PopoverContent className="w-[300px] p-0 bg-[#111118] border-white/10" align="end">
+            <Command className="bg-transparent">
               <CommandInput
                 placeholder="Search projects..."
                 value={searchQuery}
                 onValueChange={setSearchQuery}
+                className="text-zinc-300 placeholder:text-zinc-600 border-white/10"
               />
               <CommandList>
-                <CommandEmpty>No projects found.</CommandEmpty>
+                <CommandEmpty className="text-zinc-500 text-sm">No projects found.</CommandEmpty>
                 <CommandGroup>
                   {filteredProjects.map((project) => (
                     <CommandItem
                       key={project.id}
                       value={project.name}
+                      className="text-zinc-300 hover:text-zinc-100 data-[selected=true]:bg-white/5"
                       onSelect={() => {
                         router.push(`/${project.id}`);
                         setProjectsOpen(false);
                         setSearchQuery("");
                       }}
                     >
-                      <div className="flex flex-col">
-                        <span className="font-medium">{project.name}</span>
-                      </div>
+                      <span className="font-medium">{project.name}</span>
                     </CommandItem>
                   ))}
                 </CommandGroup>
@@ -155,19 +166,22 @@ export function HeaderActions({ user, projectId }: HeaderActionsProps) {
         </Popover>
       )}
 
-      <Button className="flex items-center gap-2 h-8" onClick={handleNewDesign}>
-        <Plus className="h-4 w-4" />
-        New Design
+      <Button
+        className="flex items-center gap-1.5 h-8 text-xs bg-violet-600 hover:bg-violet-500 text-white"
+        onClick={handleNewDesign}
+      >
+        <Plus className="h-3.5 w-3.5" />
+        New
       </Button>
 
       <Button
         variant="ghost"
         size="icon"
-        className="h-8 w-8"
+        className="h-8 w-8 text-zinc-500 hover:text-zinc-300 hover:bg-white/5"
         onClick={handleSignOut}
         title="Sign out"
       >
-        <LogOut className="h-4 w-4" />
+        <LogOut className="h-3.5 w-3.5" />
       </Button>
     </div>
   );
