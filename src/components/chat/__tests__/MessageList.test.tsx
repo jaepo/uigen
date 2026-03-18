@@ -15,11 +15,9 @@ afterEach(() => {
 test("MessageList shows empty state when no messages", () => {
   render(<MessageList messages={[]} />);
 
+  expect(screen.getByText("What will you build today?")).toBeDefined();
   expect(
-    screen.getByText("Start a conversation to generate React components")
-  ).toBeDefined();
-  expect(
-    screen.getByText("I can help you create buttons, forms, cards, and more")
+    screen.getByText("Describe any React component — buttons, forms, dashboards, and more")
   ).toBeDefined();
 });
 
@@ -243,13 +241,11 @@ test("MessageList applies correct styling for user vs assistant messages", () =>
     .getByText("Assistant message")
     .closest(".rounded-xl");
 
-  // User messages should have blue background
-  expect(userMessage?.className).toContain("bg-blue-600");
+  expect(userMessage?.className).toContain("bg-violet-600");
   expect(userMessage?.className).toContain("text-white");
 
-  // Assistant messages should have white background
-  expect(assistantMessage?.className).toContain("bg-white");
-  expect(assistantMessage?.className).toContain("text-neutral-900");
+  expect(assistantMessage?.className).toContain("bg-white/5");
+  expect(assistantMessage?.className).toContain("text-zinc-200");
 });
 
 test("MessageList handles empty content with parts", () => {
@@ -282,8 +278,7 @@ test("MessageList shows loading for assistant message with empty parts", () => {
   );
 
   // Check that exactly one "Generating..." text appears
-  const loadingText = container.querySelectorAll(".text-neutral-500");
-  const generatingElements = Array.from(loadingText).filter(
+  const generatingElements = Array.from(container.querySelectorAll("span")).filter(
     (el) => el.textContent === "Generating..."
   );
   expect(generatingElements).toHaveLength(1);

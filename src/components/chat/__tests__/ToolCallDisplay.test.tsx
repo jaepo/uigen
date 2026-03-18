@@ -106,7 +106,7 @@ describe("ToolCallDisplay", () => {
           state="result"
         />
       );
-      expect(container.querySelector(".bg-emerald-500")).toBeTruthy();
+      expect(container.querySelector(".bg-emerald-400")).toBeTruthy();
     });
   });
 });
